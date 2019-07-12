@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Calender">
+        <attr name="color" format="color"/>
+    </declare-styleable>
+    <string name="fri">F</string>
+    <string name="mon">M</string>
+    <string name="sat">S</string>
+    <string name="sun">S</string>
+    <string name="thu">T</string>
+    <string name="tue">T</string>
+    <string name="wed">W</string>
+</resources>
