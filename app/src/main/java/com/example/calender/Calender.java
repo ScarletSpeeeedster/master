@@ -81,13 +81,11 @@ public class Calender extends LinearLayout implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.button_next:
+        if (view.getId() == R.id.button_next){
                 goToNextMonth();
-                break;
-            case R.id.button_previous:
-                goToPreviousMonth();
-                break;
+        }
+        else if(view.getId() == R.id.button_previous){
+            goToPreviousMonth();
         }
     }
 
