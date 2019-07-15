@@ -61,11 +61,13 @@ public class CalenderRecycler extends RecyclerView.Adapter<CalenderRecycler.View
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        if(position <= previousMonthDays-1){
+        if (position <= previousMonthDays - 1) {
             holder.day.setVisibility(View.INVISIBLE);
-        }
-        else{
-            holder.day.setText(String.valueOf(position - (previousMonthDays - 1)));
+        } else {
+            if (daysInCurrentMonth >= (position - (previousMonthDays - 1)))
+                holder.day.setText(String.valueOf(position - (previousMonthDays - 1)));
+            else
+                holder.day.setVisibility(View.INVISIBLE);
         }
 
         if((holder.day.getText() + " " +MONTH_NAMES[mCalender.get(Calendar.MONTH)] + " " + mCalender.get(Calendar.YEAR)).equals(mToday)){
@@ -83,6 +85,8 @@ public class CalenderRecycler extends RecyclerView.Adapter<CalenderRecycler.View
         if(bookingsList.size()!=0){
             if(bookingsList.containsKey(holder.day.getText() + " " + MONTH_NAMES[mCalender.get(Calendar.MONTH)] + " " + mCalender.get(Calendar.YEAR))){
                 holder.bookingTxt.setVisibility(View.VISIBLE);
+                if (!(holder.day.getText() + " " + MONTH_NAMES[mCalender.get(Calendar.MONTH)] + " " + mCalender.get(Calendar.YEAR)).equalsIgnoreCase(mToday))
+                    holder.day.setCompoundDrawablesWithIntrinsicBounds(null, null, mContext.getDrawable(R.drawable.dot_drawable), null);
                 holder.bookingTxt.setText(bookingsList.get(holder.day.getText() + " " + MONTH_NAMES[mCalender.get(Calendar.MONTH)] + " " + mCalender.get(Calendar.YEAR)) + " bookings");
             }
         }
@@ -94,7 +98,7 @@ public class CalenderRecycler extends RecyclerView.Adapter<CalenderRecycler.View
 
     @Override
     public int getItemCount() {
-        return daysInCurrentMonth + previousMonthDays;
+        return (int) (7 * (Math.ceil((double) (daysInCurrentMonth + previousMonthDays) / 7)));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
