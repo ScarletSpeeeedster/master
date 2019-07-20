@@ -27,12 +27,12 @@ public class Calender extends LinearLayout implements View.OnClickListener{
     private ImageView btnPrevious, btnNext;
     private TextView month;
     private Calendar mCalendar;
-    private CalenderRecycler mCalenderAdapter;
+    public CalenderRecycler mCalenderAdapter;
     private String mToday;
     private static final String[] MONTH_NAMES = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
-    private MonthChangedListener monthChangedListener;
+    public MonthChangedListener monthChangedListener;
 
     public Calender(Context context) {
         super(context);
@@ -61,12 +61,6 @@ public class Calender extends LinearLayout implements View.OnClickListener{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 7));
         recyclerView.setAdapter(mCalenderAdapter);
-        mCalenderAdapter.setDateClickListener(new CalenderRecycler.CalenderDayClickListener() {
-            @Override
-            public void OnClick(String date) {
-                Toast.makeText(mContext, "Date is "+date, Toast.LENGTH_SHORT).show();
-            }
-        });
         Log.d(TAG, "Today, " + mToday);
     }
 
