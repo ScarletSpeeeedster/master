@@ -114,7 +114,7 @@ public class CalenderRecycler extends RecyclerView.Adapter<CalenderRecycler.View
         }
     }
 
-    interface CalenderDayClickListener{
+    public interface CalenderDayClickListener{
         void OnClick(String date);
     }
 

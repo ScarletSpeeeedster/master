@@ -126,7 +126,7 @@ public class Calender extends LinearLayout implements View.OnClickListener{
         mCalenderAdapter.addEvents(bookingsList);
     }
 
-    interface MonthChangedListener{
+    public interface MonthChangedListener{
         void onChanged(String month);
     }
 }
