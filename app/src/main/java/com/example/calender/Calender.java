@@ -27,12 +27,13 @@ public class Calender extends LinearLayout implements View.OnClickListener{
     private ImageView btnPrevious, btnNext;
     private TextView month;
     private Calendar mCalendar;
-    public CalenderRecycler mCalenderAdapter;
+    private CalenderRecycler mCalenderAdapter;
     private String mToday;
     private static final String[] MONTH_NAMES = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
-    public MonthChangedListener monthChangedListener;
+    private MonthChangedListener monthChangedListener;
+    private DayClickListener dayClickListener;
 
     public Calender(Context context) {
         super(context);
@@ -61,6 +62,12 @@ public class Calender extends LinearLayout implements View.OnClickListener{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 7));
         recyclerView.setAdapter(mCalenderAdapter);
+        mCalenderAdapter.setDateClickListener(new CalenderRecycler.CalenderDayClickListener() {
+            @Override
+            public void OnClick(String date) {
+                dayClickListener.onClick(date);
+            }
+        });
         Log.d(TAG, "Today, " + mToday);
     }
 
@@ -121,6 +128,10 @@ public class Calender extends LinearLayout implements View.OnClickListener{
         this.monthChangedListener = monthChangedListener;
     }
 
+    public void dayClickListener(DayClickListener dayClickListener){
+        this.dayClickListener = dayClickListener;
+    }
+
     public void addEvents(HashMap<String, Integer> bookingsList){
         if(mCalenderAdapter==null) return;
         mCalenderAdapter.addEvents(bookingsList);
@@ -128,5 +139,9 @@ public class Calender extends LinearLayout implements View.OnClickListener{
 
     public interface MonthChangedListener{
         void onChanged(String month);
+    }
+
+    public interface DayClickListener{
+        void onClick(String date);
     }
 }
